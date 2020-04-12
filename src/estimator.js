@@ -3,8 +3,7 @@ const covid19ImpactEstimator = (data) => {
   const {
     reportedCases,
     timeToElapse,
-    periodType,
-    totalHostpitalBeds
+    periodType
   } = data;
 
   const impact = {};
@@ -30,29 +29,13 @@ const covid19ImpactEstimator = (data) => {
       break;
   }
   // time passed as infection rates grow
-
-  //   impact.infectedByRequestedTime = timeFactor ** 2;
-  //   severeImpact.infectedByRequestedTime = timeFactor ** 2;
-
   impact.infectedByRequestedTime = 100;
   severeImpact.infectedByRequestedTime = timeFactor ** 2;
 
-  // challenge 2
-
-  impact.severeCasesByRequestedTime = impact.infectedByRequestedTime * 0.15;
-  severeImpact.severeCasesByRequestedTime = impact.infectedByRequestedTime * 0.15;
-
-  impact.hospitalBedsByRequestedTime = Math.trunc(totalHostpitalBeds * 0.35);
-  severeImpact.hospitalBedsByRequestedTime = Math.trunc(totalHostpitalBeds * 0.35);
-
-  // challenge 3
-
-  impact.casesForICUByRequestedTime = impact.infectedByRequestedTime * 0.05;
-  severeImpact.casesForICUByRequestedTime = severeImpact.infectedByRequestedTime * 0.05;
-
   return {
     data,
-    estimator: { impact, severeImpact }
+    impact, 
+    severeImpact }
   };
 };
 
