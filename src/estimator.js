@@ -8,7 +8,7 @@ const covid19ImpactEstimator = (data) => {
   // check if the timePassed in in days weeks or months
   let timeFactor;
   // eslint-disable-next-line no-empty
-  switch (period.toLowerCase()) {
+  switch (period) {
     case 'month':
       timeFactor = Math.trunc(timePassed / 3) * 30;
       break;
