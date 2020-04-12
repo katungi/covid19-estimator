@@ -12,7 +12,7 @@ const covid19ImpactEstimator = (data) => {
   // challenge 1
 
   impact.currentlyInfected = Math.trunc(reportedCases * 10);
-  severeImpact.currentInfections = Math.trunc(reportedCases * 50);
+  severeImpact.currentlyInfected = Math.trunc(reportedCases * 50);
 
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
@@ -29,8 +29,8 @@ const covid19ImpactEstimator = (data) => {
       break;
   }
   // time passed as infection rates grow
-  impact.infectedByRequestedTime = 100;
-  severeImpact.infectedByRequestedTime = timeFactor ** 2;
+  impact.infectionsByRequestedTime = 100;
+  severeImpact.infectionsByRequestedTime = timeFactor ** 2;
 
   return {
     data,
