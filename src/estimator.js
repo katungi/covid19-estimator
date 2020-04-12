@@ -16,16 +16,17 @@ const covid19ImpactEstimator = (data) => {
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
 
-  switch (periodType) {
+  switch (periodType.toLowerCase()) {
     case 'months':
-      timeFactor = Math.trunc(timeToElapse / 3) * 30;
+      timeFactor = Math.trunc(timeToElapse * 30);
       break;
     case 'weeks':
-      timeFactor = Math.trunc(timeToElapse / 3) * 7;
+      timeFactor = Math.trunc(timeToElapse * 7);
+      break;
+    case 'days':
+      timeFactor = Math.trunc(timeToElapse);
       break;
     default:
-      timeFactor = Math.trunc(timeToElapse / 3);
-      break;
   }
 
   // time passed as infection rates grow
