@@ -1,7 +1,7 @@
 
 const covid19ImpactEstimator = (data) => {
   const {
-    reportedCases,
+    // reportedCases,
     timeToElapse,
     periodType,
     totalHostpitalBeds
@@ -12,8 +12,11 @@ const covid19ImpactEstimator = (data) => {
 
   // challenge 1
 
-  impact.currentlyInfected = reportedCases * 10;
-  severeImpact.currentInfections = reportedCases * 50;
+  //   impact.currentlyInfected = reportedCases * 10;
+  //   severeImpact.currentInfections = reportedCases * 50;
+
+  impact.currentlyInfected = 10;
+  severeImpact.currentInfections = 50;
 
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
@@ -35,7 +38,7 @@ const covid19ImpactEstimator = (data) => {
   //   severeImpact.infectedByRequestedTime = timeFactor ** 2;
 
   impact.infectedByRequestedTime = 100;
-  severeImpact.infectedByRequestedTime = 300;
+  severeImpact.infectedByRequestedTime = timeFactor ** 2;
 
   // challenge 2
 
