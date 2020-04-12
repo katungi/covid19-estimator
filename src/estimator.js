@@ -17,7 +17,7 @@ const covid19ImpactEstimator = (data) => {
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
 
-  switch (periodType.toLowerCase()) {
+  switch (periodType.trim().toLowerCase()) {
     case 'months':
       timeFactor = Math.trunc((timeToElapse * 30) / 3);
       break;
@@ -37,12 +37,16 @@ const covid19ImpactEstimator = (data) => {
 
   // challenge 2
 
-  impact.severeCasesByRequestedTime = Math.trunc(impact.infectionsByRequestedTime * 0.15);
-  // const scr = severeImpact.infectionsByRequestedTime * 0.15;
-  severeImpact.severeCasesByRequestedTime = Math.trunc(severeImpact.infectionsByRequestedTime * 0.15);
+  const impactRequestedTime = Math.trunc(impact.infectionsByRequestedTime * 0.15);
+  const severeImpactRequest = Math.trunc(severeImpact.infectionsByRequestedTime * 0.15);
 
-  impact.hospitalBedsByRequestedTime = Math.trunc(totalHospitalBeds * 0.35);
-  severeImpact.hospitalBedsByRequestedTime = Math.trunc(totalHospitalBeds * 0.35);
+  impact.severeCasesByRequestedTime = impactRequestedTime;
+  severeImpact.severeCasesByRequestedTime = severeImpactRequest;
+
+  const bedsAvailable = Math.trunc(totalHospitalBeds * 0.35);
+
+  impact.hospitalBedsByRequestedTime = Math.trunc(bedsAvailable - impactRequestedTime);
+  severeImpact.hospitalBedsByRequestedTime = Math.trunc(bedsAvailable - severeImpactRequest);
 
   return {
     data,
