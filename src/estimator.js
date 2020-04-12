@@ -3,7 +3,8 @@ const covid19ImpactEstimator = (data) => {
   const {
     reportedCases,
     timeToElapse,
-    periodType
+    periodType,
+    totalHospitalBeds
   } = data;
 
   const impact = {};
@@ -32,6 +33,16 @@ const covid19ImpactEstimator = (data) => {
   // time passed as infection rates grow
   impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** timeFactor);
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** timeFactor);
+
+
+  // challenge 2
+
+  impact.severeCasesByRequestedTime = Math.trunc(impact.infectionsByRequestedTime * 0.15);
+  const scr = severeImpact.infectionsByRequestedTime * 0.15;
+  severeImpact.severeCasesByRequestedTime = Math.trunc(scr);
+
+  impact.hospitalBedsByRequestedTime = Math.trunc(totalHospitalBeds * 0.35);
+  severeImpact.hospitalBedsByRequestedTime = Math.trunc(totalHospitalBeds * 0.35);
 
   return {
     data,
