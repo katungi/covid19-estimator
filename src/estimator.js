@@ -16,25 +16,18 @@ const covid19ImpactEstimator = (data) => {
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
 
-  // switch (periodType) {
-  //   case 'months':
-  //     timeFactor = Math.trunc(timeToElapse / 3) * 30;
-  //     break;
-  //   case 'weeks':
-  //     timeFactor = Math.trunc(timeToElapse / 3) * 7;
-  //     break;
-  //   default:
-  //     timeFactor = Math.trunc(timeToElapse / 3);
-  //     break;
-  // }
-
-  if (periodType === 'months') {
-    timeFactor = Math.trunc(timeToElapse / 3) * 30;
-  } else if (periodType === 'weeks') {
-    timeFactor = Math.trunc(timeToElapse / 3) * 7;
-  } else if (periodType === 'days') {
-    timeFactor = Math.trunc(timeToElapse / 3);
+  switch (periodType) {
+    case 'months':
+      timeFactor = Math.trunc(timeToElapse(data) / 3) * 30;
+      break;
+    case 'weeks':
+      timeFactor = Math.trunc(timeToElapse(data) / 3) * 7;
+      break;
+    default:
+      timeFactor = Math.trunc(timeToElapse(data) / 3);
+      break;
   }
+
   // time passed as infection rates grow
   impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** timeFactor);
   severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** timeFactor);
