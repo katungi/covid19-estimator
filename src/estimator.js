@@ -10,16 +10,12 @@ const covid19ImpactEstimator = (data) => {
   const severeImpact = {};
   // challenge 1
 
-  //   const currentlyInfected = reportedCases * 10;
-  //   const currentInfections = reportedCases * 50;
-
   impact.currentlyInfected = reportedCases * 10;
   severeImpact.currentInfections = reportedCases * 50;
 
-
   // check if the timeToElapse in in days weeks or months
   let timeFactor;
-  // eslint-disable-next-line no-empty
+
   switch (periodType) {
     case 'month':
       timeFactor = Math.trunc(timeToElapse / 3) * 30;
@@ -33,14 +29,12 @@ const covid19ImpactEstimator = (data) => {
   }
   // time passed as infection rates grow
 
-  const infectedByRequestedTime = timeFactor ** 2;
-
   impact.infectedByRequestedTime = timeFactor ** 2;
   severeImpact.infectedByRequestedTime = timeFactor ** 2;
 
   // challenge 2
 
-  impact.severeCasesByRequestedTime = infectedByRequestedTime * 0.15;
+  impact.severeCasesByRequestedTime = impact.infectedByRequestedTime * 0.15;
 
 
   return {
