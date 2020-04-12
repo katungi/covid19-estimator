@@ -18,13 +18,13 @@ const covid19ImpactEstimator = (data) => {
 
   switch (periodType.toLowerCase()) {
     case 'months':
-      timeFactor = Math.trunc(timeToElapse * 30);
+      timeFactor = Math.trunc(timeToElapse * 30) / 3;
       break;
     case 'weeks':
-      timeFactor = Math.trunc(timeToElapse * 7);
+      timeFactor = Math.trunc(timeToElapse * 7) / 3;
       break;
     case 'days':
-      timeFactor = Math.trunc(timeToElapse);
+      timeFactor = Math.trunc(timeToElapse) / 3;
       break;
     default:
   }
