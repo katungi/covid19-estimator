@@ -2,7 +2,7 @@
 const covid19ImpactEstimator = (data) => {
   const {
     region: {
-      avgDailyIncomeInUsd,
+      avgDailyIncomeInUSD,
       avgDailyIncomePopulation
     },
     reportedCases,
@@ -69,7 +69,7 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(sevImpactVentilator);
 
   let newDay;
-  const compute = avgDailyIncomePopulation * avgDailyIncomeInUsd;
+  const compute = avgDailyIncomePopulation * avgDailyIncomeInUSD;
   if (periodType === 'months') {
     newDay = timeToElapse * 30;
 
