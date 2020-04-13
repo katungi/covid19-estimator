@@ -1,16 +1,23 @@
 
 const covid19ImpactEstimator = (data) => {
   const {
+    region: {
+      name,
+      avgDailyIncomeInUsd,
+      avgDailyIncomePopulation
+    },
     reportedCases,
     timeToElapse,
     periodType,
+    population,
     totalHospitalBeds
   } = data;
 
   const impact = {};
   const severeImpact = {};
 
-  // challenge 1 answers
+
+  // challenge 1
   impact.currentlyInfected = Math.trunc(reportedCases * 10);
   severeImpact.currentlyInfected = Math.trunc(reportedCases * 50);
 
@@ -49,6 +56,43 @@ const covid19ImpactEstimator = (data) => {
 
   impact.hospitalBedsByRequestedTime = Math.trunc(ImpactHospitalBedval);
   severeImpact.hospitalBedsByRequestedTime = Math.trunc(sevImpactHospitalBedval);
+
+  // challenge 3
+
+  const ImpactCasesforICU = impact.infectionsByRequestedTime * 0.05;
+  const sevImpactCasesforICU = severeImpact.infectionsByRequestedTime * 0.05;
+  const ImpactVentilator = impact.infectionsByRequestedTime * 0.02;
+  const sevImpactVentilator = severeImpact.infectionsByRequestedTime * 0.02;
+
+  impact.casesForICUByRequestedTime = ImpactCasesforICU;
+  severeImpact.casesForICUByRequestedTime = sevImpactCasesforICU;
+
+  impact.casesForVentilatorsByRequestedTime = ImpactVentilator;
+  severeImpact.casesForVentilatorsByRequestedTime = sevImpactVentilator;
+
+  let newDay;
+  if (periodType === 'months') {
+    newDay = timeToElapse * 30;
+  } else if (periodType === 'weeks') {
+    newDay = timeToElapse * 7;
+  } else if (periodType === 'days') {
+    newDay = timeToElapse * 1;
+  }
+  const totalAvg = avgDailyIncomeInUsd * avgDailyIncomePopulation;
+  const arith = impact.infectionsByRequestedTime * totalAvg;
+  const fill = severeImpact.infectionsByRequestedTime * totalAvg;
+  const sevArith = fill;
+  const metic = arith / newDay;
+  const sevMetic = sevArith / newDay;
+
+  impact.dollarsFlight = Math.trunc(metic);
+  severeImpact.dollarsFlight = Math.trunc(sevMetic);
+
+  impact.region = name;
+  impact.population = population;
+
+  severeImpact.region = name;
+  severeImpact.population = population;
 
   return {
     data,
