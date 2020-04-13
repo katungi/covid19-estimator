@@ -74,26 +74,26 @@ const covid19ImpactEstimator = (data) => {
     newDay = timeToElapse * 30;
 
     impact.dollarsInFlight = (
-      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay)
     );
     severeImpact.dollarsInFlight = (
-      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay)
     );
   } else if (periodType === 'weeks') {
     newDay = timeToElapse * 7;
     impact.dollarsInFlight = (
-      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay)
     );
     severeImpact.dollarsInFlight = (
-      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay)
     );
   } else if (periodType === 'days') {
     newDay = timeToElapse * 1;
     impact.dollarsInFlight = (
-      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((impact.infectionsByRequestedTime * compute) / newDay)
     );
     severeImpact.dollarsInFlight = (
-      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+      Math.trunc((severeImpact.infectionsByRequestedTime * compute) / newDay)
     );
   }
   // const totalAvg = avgDailyIncomeInUsd * avgDailyIncomePopulation *;
