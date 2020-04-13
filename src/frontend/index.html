@@ -22,18 +22,20 @@
 </head>
 <body>
 	
-	<div class="limiter">
-		<div class="container-login100">
+	<main class="limiter">
+		
+		<main class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" style="margin-top: 100px;" data-tilt>
 					<img src="images/medicine.jpg" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form">
-					<span class="login100-form-title">
+					<h1><span class="login100-form-title">
 						Corona Virus Estimator
-					</span>
+					</span></h1>
 
+					<label for="population" style="margin-left:20px;">Enter the total population:</label>
 					<div class="wrap-input100 validate-input" data-validate = "Enter population of region">
 						<input class="input100" data-population type="text" name="data-population" placeholder="Population">
 						<span class="focus-input100"></span>
@@ -42,6 +44,7 @@
 						</span>
 					</div>
 
+					<label for="population" style="margin-left:20px;">Enter the elapsed time:</label>
 					<div class="wrap-input100 validate-input" data-validate = "Enter the time that has elapsed">
 						<input class="input100" data-time-to-elapse type="text" name="data-time-to-elapse" placeholder="Time that has passed">
 						<span class="focus-input100"></span>
@@ -50,6 +53,7 @@
 						</span>
 					</div>
 
+					<label for="population" style="margin-left:20px;">Enter the number of reported cases:</label>
 					<div class="wrap-input100 validate-input" data-validate = "Enter number of reported cases">
 						<input class="input100" data-reported-cases type="text" name="data-reported-cases" placeholder="Number of reported cases">
 						<span class="focus-input100"></span>
@@ -58,6 +62,7 @@
 						</span>
 					</div>
 
+					<label for="population" style="margin-left:20px;">Enter the total available beds:</label>
 					<div class="wrap-input100 validate-input" data-validate = "Enter number of available beds">
 						<input class="input100" data-total-hospital-beds type="text" name="data-total-hospital-beds" placeholder="Number of all hospital beds">
 						<span class="focus-input100"></span>
@@ -66,8 +71,8 @@
 						</span>
 					</div>
 
+					<label for="population" style="margin-left:20px;">Select the type of period for the time:</label>
 					<div class="wrap-input100 validate-input" data-validate = "Select period type">
-
 						<select name="data-period-type" id="" class="input100" data-period-type >
 							<option value="Months" class="input100" >Months</option>
 							<option value="Weeks" class="input100" >Weeks</option>
@@ -93,8 +98,8 @@
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
+		</main>
+	</main>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
