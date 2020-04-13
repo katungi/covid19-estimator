@@ -2,9 +2,7 @@
 const covid19ImpactEstimator = (data) => {
   const {
     region: {
-      name = 'Africa',
-      avgDailyIncomeInUsd = 5,
-      avgDailyIncomePopulation
+      avgDailyIncomeInUsd
     },
     reportedCases,
     timeToElapse,
@@ -67,32 +65,52 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForICUByRequestedTime = Math.trunc(ImpactCasesforICU);
   severeImpact.casesForICUByRequestedTime = Math.trunc(sevImpactCasesforICU);
 
-  impact.casesForVentilatorsByRequestedTime = ImpactVentilator;
-  severeImpact.casesForVentilatorsByRequestedTime = sevImpactVentilator;
+  impact.casesForVentilatorsByRequestedTime = Math.trunc(ImpactVentilator);
+  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(sevImpactVentilator);
 
   let newDay;
+  const compute = population * avgDailyIncomeInUsd;
   if (periodType === 'months') {
     newDay = timeToElapse * 30;
+
+    impact.dollarsInFlight = (
+      parseInt((impact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
+    severeImpact.dollarsInFlight = (
+      parseInt((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
   } else if (periodType === 'weeks') {
     newDay = timeToElapse * 7;
+    impact.dollarsInFlight = (
+      parseInt((impact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
+    severeImpact.dollarsInFlight = (
+      parseInt((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
   } else if (periodType === 'days') {
     newDay = timeToElapse * 1;
+    impact.dollarsInFlight = (
+      parseInt((impact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
+    severeImpact.dollarsInFlight = (
+      parseInt((severeImpact.infectionsByRequestedTime * compute) / newDay, 10)
+    );
   }
-  const totalAvg = avgDailyIncomeInUsd * avgDailyIncomePopulation;
-  const arith = impact.infectionsByRequestedTime * totalAvg;
-  const fill = severeImpact.infectionsByRequestedTime * totalAvg;
-  const sevArith = fill;
-  const metic = arith / newDay;
-  const sevMetic = sevArith / newDay;
+  // const totalAvg = avgDailyIncomeInUsd * avgDailyIncomePopulation *;
+  // const arith = Math.trunc(impact.infectionsByRequestedTime * totalAvg);
+  // const fill = Math.trunc(severeImpact.infectionsByRequestedTime * totalAvg);
+  // const sevArith = fill;
+  // const metic = arith / newDay;
+  // const sevMetic = sevArith / newDay;
 
-  impact.dollarsFlight = Math.trunc(metic);
-  severeImpact.dollarsFlight = Math.trunc(sevMetic);
+  // impact.dollarsFlight = Math.trunc(metic);
+  // severeImpact.dollarsFlight = Math.trunc(sevMetic);
 
-  impact.region = name;
-  impact.population = population;
+  // impact.region = name;
+  // impact.population = population;
 
-  severeImpact.region = name;
-  severeImpact.population = population;
+  // severeImpact.region = name;
+  // severeImpact.population = population;
 
   return {
     data,
