@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 const express = require('express');
 
 const js2xmlparser = require('js2xmlparser');
@@ -9,6 +11,7 @@ const covid19ImpactEstimator = require('../estimator');
 const app = express();
 
 app.use(express.json());
+
 app.use(responseTime());
 
 app.post('/api/v1/on-covid-19/json', (req, res, next) => {
@@ -27,10 +30,11 @@ app.post('/api/v1/on-covid-19/xml', (req, res, next) => {
   next();
 });
 
-app.get('/api/v1/on-covid-19/logs', (req, res, next) => {
-  res.header('Content-Type', 'text/plain; charset=utf-8');
-  res.send('Hello world');
-  next();
-});
+// app.get('/api/v1/on-covid-19/logs', (req, res, next, time) => {
+//   const dur = console.log(req.method, req.url, time);
+//   res.header('Content-Type', 'text/plain; charset=utf-8');
+//   res.send(dur);
+//   next();
+// });
 
 module.exports = app;
