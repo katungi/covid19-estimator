@@ -48,6 +48,7 @@ const covid19ImpactEstimator = (data) => {
   impact.severeCasesByRequestedTime = Math.trunc(impactRequestedTime);
   severeImpact.severeCasesByRequestedTime = Math.trunc(severeImpactRequest);
 
+  // find number of available beds
   const bedsAvailable = totalHospitalBeds * 0.35;
   const ImpactHospitalBedval = bedsAvailable - impactRequestedTime;
   const sevImpactHospitalBedval = bedsAvailable - severeImpactRequest;
