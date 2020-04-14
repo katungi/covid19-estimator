@@ -1,10 +1,16 @@
 import fs from 'fs';
 
+import { Router } from 'express';
+
+const path = require('path');
+
 const express = require('express');
 
 const js2xmlparser = require('js2xmlparser');
 
-const responseTime = require('response-time');
+const morgan = require('morgan');
+
+// const responseTime = require('response-time');
 
 const covid19ImpactEstimator = require('../estimator');
 
@@ -12,7 +18,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(responseTime());
+// app.use(responseTime());
 
 app.post('/api/v1/on-covid-19/json', (req, res, next) => {
   const output = covid19ImpactEstimator(req.body);
@@ -30,11 +36,12 @@ app.post('/api/v1/on-covid-19/xml', (req, res, next) => {
   next();
 });
 
-// app.get('/api/v1/on-covid-19/logs', (req, res, next, time) => {
-//   const dur = console.log(req.method, req.url, time);
-//   res.header('Content-Type', 'text/plain; charset=utf-8');
-//   res.send(dur);
-//   next();
-// });
+Router.get('/api/v1/on-covid-19/logs', (req, res, next) => {
+  const format = ':method\t\t:url\t\t:status\t\t:response-time[0]ms';
+  const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+  app.use(morgan(format, { stream: accessLogStream }));
+  res.header('Content-Type', 'text/plain; charset=utf-8');
+  next();
+});
 
 module.exports = app;
