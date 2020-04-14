@@ -1,24 +1,21 @@
-import fs from 'fs';
-
-import { Router } from 'express';
-
-const path = require('path');
 
 const express = require('express');
 
 const js2xmlparser = require('js2xmlparser');
 
-const morgan = require('morgan');
+const responseTime = require('response-time');
 
-// const responseTime = require('response-time');
+const responseTimeHandler = require('./handlers');
 
 const covid19ImpactEstimator = require('../estimator');
 
 const app = express();
 
+app.use(responseTimeHandler);
+
 app.use(express.json());
 
-// app.use(responseTime());
+app.use(responseTime());
 
 app.post('/api/v1/on-covid-19/json', (req, res, next) => {
   const output = covid19ImpactEstimator(req.body);
@@ -36,12 +33,15 @@ app.post('/api/v1/on-covid-19/xml', (req, res, next) => {
   next();
 });
 
-Router.get('/api/v1/on-covid-19/logs', (req, res, next) => {
-  const format = ':method\t\t:url\t\t:status\t\t:response-time[0]ms';
-  const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-  app.use(morgan(format, { stream: accessLogStream }));
-  res.header('Content-Type', 'text/plain; charset=utf-8');
+app.get('/api/v1/on-covid-19/logs', (req, res, next) => {
+  res.setHeader('content-type', 'text/plain');
+  res.type('text/plain');
+  res.send(responseTimeHandler);
   next();
 });
 
+app.get('/', (req, res, next) => {
+  res.send('Covid 19 Estimator api');
+  next();
+});
 module.exports = app;
