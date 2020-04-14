@@ -1,0 +1,19 @@
+{
+  "name": "covid-estimator",
+  "version": "1.0.0",
+  "description": "a rest api to serve estimation data on covid 19",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7"
+  }
+}
