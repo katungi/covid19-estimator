@@ -32,14 +32,12 @@ app.post('/api/v1/on-covid-19/xml', (req, res, next) => {
   res.send(estimate);
   next();
 });
-
 app.get('/api/v1/on-covid-19/logs', (req, res, next) => {
   res.setHeader('content-type', 'text/plain');
   res.type('text/plain');
   res.send(responseTimeHandler);
   next();
 });
-
 app.get('/', (req, res, next) => {
   res.send('Covid 19 Estimator api');
   next();
