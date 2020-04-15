@@ -1,1 +1,1 @@
-web: node src/backend/server.js
+web: npx babel-node src/backend/server.js
