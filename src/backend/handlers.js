@@ -1,7 +1,6 @@
 const fs = require('fs');
 const responseTime = require('response-time');
 
-
 const toServerLog = async (logInput) => {
   const line = `${logInput}\n`;
   await fs.appendFileSync('./logs/request-response/logs.txt', line, (err) => {

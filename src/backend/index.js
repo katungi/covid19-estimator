@@ -20,7 +20,7 @@ app.use(responseTime());
 app.post('/api/v1/on-covid-19/json', (req, res, next) => {
   const output = covid19ImpactEstimator(req.body);
   res.type('application/json');
-  res.send(output);
+  res.send(JSON.stringify(output));
   next();
 });
 
@@ -29,11 +29,11 @@ app.post('/api/v1/on-covid-19/xml', (req, res, next) => {
   res.type('application/xml');
   const output = covid19ImpactEstimator(req.body);
   const estimate = js2xmlparser.parse('estimate', output);
-  res.send(estimate);
+  res.send(JSON.stringify(estimate));
   next();
 });
 app.get('/api/v1/on-covid-19/logs', (req, res, next) => {
-  res.setHeader('content-type', 'text/plain');
+  res.setHeader('content-type', 'text/plain', 'charset=utf-8');
   res.type('text/plain');
   res.send(responseTimeHandler);
   next();
