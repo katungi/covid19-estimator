@@ -68,3 +68,5 @@ GET   200 01ms
 GET  /api/v1/on-covid-19/logs 200 01ms
 GET   304 10ms
 GET  /api/v1/on-covid-19/logs 304 01ms
+GET   304 08ms
+GET  /favicon.ico 404 02ms
